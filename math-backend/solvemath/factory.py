@@ -1,22 +1,13 @@
-from solvemath.AlgebraSolver import AlgebraSolver
-from solvemath.trigonometry import TrigonometrySolver
-from solvemath.SeriesSolver import SeriesSolver
+from solvemath.algebra_solver import AlgebraSolver
+from solvemath.series_solver import SeriesSolver
+from solvemath.trigonometry_solver import TrigonometrySolver
 
 class SolverFactory:
-    def __init__(self):
-        self.solvers = {
-            "algebra": AlgebraSolver(),
-            "trig"  : TrigonometrySolver(),
-            "series" : SeriesSolver(), 
-        }
-
-    def get_solver(self, input_text: str):
-        input_text = input_text.lower()
-        if any(keyword in input_text for keyword in [
-             "equation", 
-            "factor", "simplify", "surd", "rational", "/", "<", ">", "≥", "≤"
-        ]):
-            return self.solvers["algebra"]
-        elif any(keyword in input_text for keyword in ['sin', 'cos', 'tan', 'triangle', 'verify identity']):
-            return self.solvers["trig"]
+    def get_solver_by_code(self, code):
+        if code == 1:
+            return AlgebraSolver()
+        elif code == 2:
+            return SeriesSolver()
+        elif code == 3:
+            return TrigonometrySolver()
         return None
